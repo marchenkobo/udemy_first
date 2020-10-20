@@ -1,26 +1,25 @@
 "use strict";
 
-const num = 30;
+let num = 10;
 
-if (num > 50){
-    console.log('Больше 50-ти');
-} else if (num < 10){
-    console.log('Больше 10-ти');
-} else{
-    console.log(`Равно ${num}-ти`);
-}
+while(num > 8){
+    console.log(num + ' while');
+    num--;
+};
 
 
-num > 10 ? console.log("Больше 10-ти") : console.log("Меньше 10-ти");
+do{
+    console.log(num + ' do/while'); //Код выполняется до проверки условия
+    num++;
+} while (num < 11);
 
-switch(num + 1){
-    case num < 10:
-        console.log("Меньше 10");
-        break;
-    case num > 60:
-        console.log("Больше 60-ти");
-        break;
-    default:
-        console.log("Между 10 и 60");
-        // если default последний или гарантированно совпадёт с как-то вариантом выше *break можно не использовать
+
+for (let i = 0; i < 10; i++){
+    if(i === 6){
+        break;  // break - завершает выполнения цикла при заданном условии
+    }
+    if( i === 3){
+        continue; // continue - позволяет "пропустить шаг" при заданном условии
+    }
+    console.log(i + ' for');
 }
