@@ -1,54 +1,24 @@
 "use strict";
 
-let numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?',0);
+let str = "Hello World!";
 
-const personaMovieDB = {
-    count: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false,
-};
+console.log(str.length);  // длина строки
 
-// for(let i = 0; i < 3; i++){
-//     let movieTitle;
-//     let movieRate;
-
-//     do{
-//         movieTitle = prompt("Один из последних просмотренных фильмов?");
-//     } 
-//     while(movieTitle === null || movieTitle.length == 0 || movieTitle.length > 50);
-    
-//     do{
-//         movieRate = +prompt("На сколько оценете его?",0);
-//     } 
-//     while(isNaN(movieRate));
-    
-//     personaMovieDB.movies[movieTitle] = movieRate;
-// }   
+console.log(str[0]);  // Получить символ по номеру
+console.log(str.charAt(1));  // Получить символ по номеру
+console.log(str[str.length - 1] );  // Получить последний символ
 
 
-for(let i = 0; i < 2; i++){
-    let movieTitle = prompt("Один из последних просмотренных фильмов?");
-    let movieRate = +prompt("На сколько оценете его?", 0);
-    if(movieTitle != null && movieTitle != '' && !isNaN(movieRate && movieRate != '')){
-        personaMovieDB.movies[movieTitle] = movieRate; 
-        console.log("Done");
-    } else{
-        console.log("Error");
-        i--;
-    }
-}
+console.log("New " + str.slice(6));  // Сами по себе "строки" неизменяемы, но мы можем создавать новые строки на основе той, которую хотели бы изменить
 
-if(personaMovieDB.count < 10){
-    console.log("Просмотрено мало фильмов");
-} else if(personaMovieDB.count >= 10 && personaMovieDB.count < 30){
-    console.log("Вы классический зритель");
-} else if(personaMovieDB.count >= 30){
-    console.log("Вы Киноман");
-} else{
-    console.log("Произошла ошибка");
-}
+console.log(str.toUpperCase());  // Все символы к верхнему регистру
+console.log(str.toLowerCase());  // Все символы к нижнему регистру
 
 
-console.log(personaMovieDB.movies);
+console.log(str.indexOf("!"));  // Позиция искуемой подстроки
+
+console.log(str.slice(0, 5));  // Получение подстроки (начальное, конечное значение) **конечное можно не ставить
+console.log(str.slice(-6));  // Получение подстроки с конца
+
+console.log(parseFloat("12.2px")); //Принимает строку в качестве аргумента и возвращает десятичное число (число с плавающей точкой)
+console.log(parseInt("12.2px")); //Принимает строку в качестве аргумента и возвращает целое число
