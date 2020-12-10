@@ -1,19 +1,24 @@
 "use strict";
 
-function learnLang(lang, callback){
-    console.log(`Я учу: ${lang}`);
-    callback();
+const options = {
+    name: 'test',
+    width: 1024,
+    height: 1024,
+    colors: {
+        border: 'black',
+        bg: 'red',
+    },
+};
+
+for (let prop in options){
+    console.log(`Значение ${prop} равно: ${options[prop]}`);
 }
 
-learnLang('JavaScript', function(){
-    console.log("И у меня всё получается!");
-});
+console.log(Object.keys(options).length);
 
 
 
-// Или такая запись:
+let {border, bg} = options.colors;
 
-// learnLang('JavaScript', testCallback);
-// function testCallback(){
-//     console.log("И у меня всё получается!");
-// };
+console.log(border);
+console.log(bg);
