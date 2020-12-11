@@ -1,24 +1,13 @@
 "use strict";
 
-const options = {
-    name: 'test',
-    width: 1024,
-    height: 1024,
-    colors: {
-        border: 'black',
-        bg: 'red',
-    },
-};
+let goods = 'milk, bread, meat';
 
-for (let prop in options){
-    console.log(`Значение ${prop} равно: ${options[prop]}`);
-}
+let goodsArr = goods.split(', '); // создать массив из строки (указав разделитель)
+console.log(goodsArr);
+console.log(goodsArr.join('; ')); // создать строку из массива (с розделителем)
 
-console.log(Object.keys(options).length);
+let arr = [1,4,6,8,9];
 
-
-
-let {border, bg} = options.colors;
-
-console.log(border);
-console.log(bg);
+arr.forEach(function(item, counter, arr){
+    console.log(`In position ${counter} we can see item: ${item} wich placed in ${arr} massive`);
+});
