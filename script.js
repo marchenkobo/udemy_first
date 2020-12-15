@@ -1,59 +1,32 @@
 "use strict";
 
-let obj = {
-    a: 0,
-    b: 1,
-    c: 2,
-    d: {
-        e: 5,
-        f: 6
+const soldier = {
+    armor: true,
+    health: 100,
+    sayHello: function(){
+        console.log('Hello!');
     }
 };
 
-// Создание (поверхностной) копии объекта через цикл:
-let objCopy = {};
-for(let prop in obj){
-    objCopy[prop] = obj[prop];
-}
+const john = {
+    health: 99
+};
 
-objCopy.d.e = 5.5; // !!! Меняет и вложеный (глубокий) объект объекта "obj"
-objCopy.g = 7; // Изменение только в скопированном объекте
+john.__proto__ = soldier;
 
-console.log(obj);
-console.log(objCopy);
+john.sayHello();
+console.log(john.health);
+console.log(john.armor);
 
-
-// Создание (поверхностной) копии объекта через обьъеденение объектов:
-let objClone = Object.assign({}, obj);
-console.log(objClone);
-
-objClone.d.e = 5.6; // Изменение вложенног объекта также редактируют оригинал
-objClone.j = 8; 
-console.log(obj);
-console.log(objClone);
+console.log(john); //при просмотре через консоль во вкладке __proto__ видим методы и свойства объекта "soldier"
 
 
-// Создание копии массива (!помиомо цикла)
-let arr = ['a', 'b', 'c'];
+//Современные способы назанчения прототипа:
 
-let newArr = arr.slice();
-newArr.push('d');
-console.log(arr);
-console.log(newArr);
+const newSoldier = {};
+Object.setPrototypeOf(newSoldier, soldier); //При условии что объкт которому назначем прототип уже был создан заранее
+console.log(newSoldier); //В консоле появится вкладка __proto__ со свойствами объекта "soldier"
 
 
-// Spread оператор (*оператор разворота) позволяет "разобрать" массив на отдельные элементы 
-let video = ['yourube', 'vimeo', 'coub'],
-    socials = ['vk', 'facebook', 'instagram'],
-    internet = [...video, ...socials, 'telegram', 'viber'];
-
-console.log(internet);
-
-let arrayClone = [...arr]; //Создание копии массива с помощью spread оператора
-arrayClone.push('newValue')
-console.log(arrayClone);
-
-
-//Копирование объекта с помощью Spread оператора
-let newObj = {...obj}; 
-console.log(newObj);
+const otherSoldier = Object.create(soldier); // Создает новый объект уже с наследственностью на объект прототип "soldier"
+console.log(otherSoldier); //В консоле появится вкладка __proto__ со свойствами объекта "soldier"
