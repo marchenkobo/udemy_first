@@ -1,32 +1,70 @@
 "use strict";
 
-const soldier = {
-    armor: true,
-    health: 100,
-    sayHello: function(){
-        console.log('Hello!');
+let numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?',0);
+while(numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms) ){
+    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?',0);
+}
+
+
+
+
+
+const personaMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false,
+    rememberMyFilms: function(){
+        for(let i = 0; i < 2; i++){
+            let movieTitle = prompt("Один из последних просмотренных фильмов?");
+            let movieRate = +prompt("На сколько оценете его?", 0);
+            if(movieTitle != null && movieTitle != '' && !isNaN(movieRate) && movieRate != ''){
+                personaMovieDB.movies[movieTitle] = movieRate; 
+                console.log("Done");
+            } else{
+                console.log("Error");
+                i--;
+            }
+        }    
+    },
+    detectPersonalLevel: function(){
+        if(personaMovieDB.count < 10){
+            console.log("Просмотрено мало фильмов");
+        } else if(personaMovieDB.count >= 10 && personaMovieDB.count < 30){
+            console.log("Вы классический зритель");
+        } else if(personaMovieDB.count >= 30){
+            console.log("Вы Киноман");
+        } else{
+            console.log("Произошла ошибка");
+        }  
+    },
+    showMyDB: function(){
+        if(!personaMovieDB.privat){
+            console.log(personaMovieDB);
+        }  
+    },
+    writeYouGenres: function(){
+        for(let i = 0; i < 3; i++){
+            let genre = prompt(`Ваш любимый жанр под номером ${i + 1}`);
+            if(genre == "" || genre == null){
+                i--;   
+            } else {
+                personaMovieDB.genres.push(genre);  
+            }
+        }  
+        this.genres.forEach(function(item, index){
+            console.log(`Любимый жанр №${index + 1} - это ${item}`);
+        }); 
+    },
+    toggleVisibleMyDB: function(){
+        if(this.privat){
+            this.privat = false;
+        } else{
+            this.privat = true;
+        }
     }
 };
 
-const john = {
-    health: 99
-};
-
-john.__proto__ = soldier;
-
-john.sayHello();
-console.log(john.health);
-console.log(john.armor);
-
-console.log(john); //при просмотре через консоль во вкладке __proto__ видим методы и свойства объекта "soldier"
-
-
-//Современные способы назанчения прототипа:
-
-const newSoldier = {};
-Object.setPrototypeOf(newSoldier, soldier); //При условии что объкт которому назначем прототип уже был создан заранее
-console.log(newSoldier); //В консоле появится вкладка __proto__ со свойствами объекта "soldier"
-
-
-const otherSoldier = Object.create(soldier); // Создает новый объект уже с наследственностью на объект прототип "soldier"
-console.log(otherSoldier); //В консоле появится вкладка __proto__ со свойствами объекта "soldier"
+personaMovieDB.showMyDB();
+personaMovieDB.writeYouGenres();
