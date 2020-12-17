@@ -1,70 +1,59 @@
 "use strict";
 
-let numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?',0);
-while(numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms) ){
-    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?',0);
+// To String
+console.group("To String:");
+
+// 1. Метод String()
+console.log(typeof(String(null)));
+
+// 2. Сложение числа и строки
+console.log(typeof(5+ ''));
+console.log(26 + 'px');
+console.log('vk.com/catalog/' + 5);
+
+// Block End
+console.groupEnd();
+
+
+// To Number
+console.group("To Number:");
+
+// 1. Метод Number()
+console.log(typeof(Number('5'))); //изначально передается строка
+
+// 2. Унарный плюс +
+console.log(typeof(+"9")); //изначально передается строка
+
+// 3. Метод parseInt()
+console.log(typeof(parseInt('15px', 10)));
+
+// Block End
+console.groupEnd();
+
+
+// To Boolean
+console.group("To Boolean:");
+
+// 0, пустая строка '', null, undefined, NaN == false, всё остальное в JS == true (даже пустые массивы и т.д)
+
+// 1. Присвоение
+let switcher = null;
+
+if(!switcher){
+    alert("Switcher Disabled");
+}
+switcher = true;
+if(switcher){
+    console.log("Switcher working...");
 }
 
+// 2. Метод Boolean()
+console.log(typeof(Boolean(3)));
+
+// 3. С помощью двух знаков отрицания !!
+console.log(typeof(!!"44"));
+
+// Block End
+console.groupEnd();
 
 
-
-
-const personaMovieDB = {
-    count: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false,
-    rememberMyFilms: function(){
-        for(let i = 0; i < 2; i++){
-            let movieTitle = prompt("Один из последних просмотренных фильмов?");
-            let movieRate = +prompt("На сколько оценете его?", 0);
-            if(movieTitle != null && movieTitle != '' && !isNaN(movieRate) && movieRate != ''){
-                personaMovieDB.movies[movieTitle] = movieRate; 
-                console.log("Done");
-            } else{
-                console.log("Error");
-                i--;
-            }
-        }    
-    },
-    detectPersonalLevel: function(){
-        if(personaMovieDB.count < 10){
-            console.log("Просмотрено мало фильмов");
-        } else if(personaMovieDB.count >= 10 && personaMovieDB.count < 30){
-            console.log("Вы классический зритель");
-        } else if(personaMovieDB.count >= 30){
-            console.log("Вы Киноман");
-        } else{
-            console.log("Произошла ошибка");
-        }  
-    },
-    showMyDB: function(){
-        if(!personaMovieDB.privat){
-            console.log(personaMovieDB);
-        }  
-    },
-    writeYouGenres: function(){
-        for(let i = 0; i < 3; i++){
-            let genre = prompt(`Ваш любимый жанр под номером ${i + 1}`);
-            if(genre == "" || genre == null){
-                i--;   
-            } else {
-                personaMovieDB.genres.push(genre);  
-            }
-        }  
-        this.genres.forEach(function(item, index){
-            console.log(`Любимый жанр №${index + 1} - это ${item}`);
-        }); 
-    },
-    toggleVisibleMyDB: function(){
-        if(this.privat){
-            this.privat = false;
-        } else{
-            this.privat = true;
-        }
-    }
-};
-
-personaMovieDB.showMyDB();
-personaMovieDB.writeYouGenres();
