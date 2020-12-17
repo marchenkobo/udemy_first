@@ -1,59 +1,36 @@
 "use strict";
 
-// To String
-console.group("To String:");
+console.log([] + false - null + true); //NaN ('' - null)
+// Пустой массив равен пустой строке и при арифметических действиях ведет себя как строка
 
-// 1. Метод String()
-console.log(typeof(String(null)));
+let y = 1; 
+let x = y = 2;
+console.log(x); // 2;
+// При последовательном присваивании операция выполняетс с право на лево
+// y = 2, x = y 
 
-// 2. Сложение числа и строки
-console.log(typeof(5+ ''));
-console.log(26 + 'px');
-console.log('vk.com/catalog/' + 5);
+console.log('1'[0]); // 1
+//Просто обращение к строке по инднексу
 
-// Block End
-console.groupEnd();
+console.log(null || 2 && 3 || 4); // 3
+// Логические выражения вычисляются слева направо, но у оператора И (&&) приоритет выше, чем у оператора ИЛИ (||) *см. таблицу
+//Так что происходит следующще 2 && 3 => null || 3 => 3 || 4 => 3;
 
+// Оператор 'И' (&&) останавливается  на (и возвращает) false, или последнее значение в списке
+console.log(true && 0 && "num");
+console.log(true && 1 && "lastItem");
 
-// To Number
-console.group("To Number:");
+// Оператор 'ИЛИ' (||) останавливается  на (и возвращает) true, или последнее значение в списке
+console.log(0 || "trueString" || null);
+console.log(0 || false || null);
 
-// 1. Метод Number()
-console.log(typeof(Number('5'))); //изначально передается строка
-
-// 2. Унарный плюс +
-console.log(typeof(+"9")); //изначально передается строка
-
-// 3. Метод parseInt()
-console.log(typeof(parseInt('15px', 10)));
-
-// Block End
-console.groupEnd();
+let a = [1, 2, 3],
+    b = [1, 2, 3];
+console.log(a == b); //false
+// Два разных контейнера (хранилища), просто содержащие одинаковую информацию.
+//**Два разных ящика с одинаковым количеством и сортом яблок
 
 
-// To Boolean
-console.group("To Boolean:");
-
-// 0, пустая строка '', null, undefined, NaN == false, всё остальное в JS == true (даже пустые массивы и т.д)
-
-// 1. Присвоение
-let switcher = null;
-
-if(!switcher){
-    alert("Switcher Disabled");
-}
-switcher = true;
-if(switcher){
-    console.log("Switcher working...");
-}
-
-// 2. Метод Boolean()
-console.log(typeof(Boolean(3)));
-
-// 3. С помощью двух знаков отрицания !!
-console.log(typeof(!!"44"));
-
-// Block End
-console.groupEnd();
-
+console.log("Ёжик" > "яблоко"); //false
+//Сравниваются юникоды символов (хачение каждого символоа можно посмотреть в таблцие символов)
 
