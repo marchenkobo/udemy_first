@@ -1,42 +1,67 @@
 "use strict";
 
-const div = document.createElement('div');
-const span = document.createElement('span');
-const p = document.createElement('p');
-const button = document.createElement('button');
-// Создаёт HTML элемент !но только в самом скрипте!
-
-// document.createTextNode("Создать текст");
-
-document.body.append(div);
-// Помещает созданный элемент в HTML файл ( в конец укзанного места *body)
-
-document.body.prepend(span);
-// Помещает созданный элемент в HTML файл ( в начало укзанного места *body)
-
-document.querySelector("span").after(p);
-// Помещает созданный элемент в HTML файл (в место после указаного элемента *span)
-
-document.querySelector("div").before(button);
+const btn2 = document.querySelector('#button--2');
 
 
-document.querySelector('div').style.height = "200px";
-document.querySelector('div').style.background= "#f1f1f1";
-// Назначение CSS свойств, отдельно по каждому параметру
+btn2.onclick = function(){
+    alert('Вариант отработки 2');
+};
+// btn2.onclick = alert('Сработало событие onclick-2'); Работает также.
 
 
-document.querySelector('button').style.cssText = "padding: 8px; width: 100px; margin-bottom: 12px";  
-document.querySelector('div').style.cssText = "padding: 16px; color: #fff; height: 225px; background-color: #000;"; 
-// Групповое назначение CSS свойств одной командой
-// *! Перебивает стили, которые указаны отдельными парметрами
+const btn3 = document.querySelector('#button--3');
+btn3.addEventListener('click', function(){
+    alert('Вариант отработки 3.0 ');
+});
+// btn3.addEventListener('click', alert(...); Работает иначе!
+
+//Можно добавлять события на одно и то же действие:
+btn3.addEventListener('click', function(){
+    alert('Вариант отработки 3.1');
+});
+
+//Использование обьекста события "event" *(e)
+btn3.addEventListener('click', function(e){
+    console.log(e); //Вывод объекта события с полной информацией о событии 
+    e.target.textContent = 'Содержимое изменилось'; //Использование свойств обьекта события 
+});
 
 
-// div.textContent = "Hello";
-//Вставляет ТОЛЬКО текст внутрь указанного элемента
 
-div.innerHTML = "<h3>Hello!</h3>"; 
-// Вставляет код / текст внутрь указанного элемента
+// Чтобы удалить событие оно должно сслыаться на одно и то же событие, а так же на ту же функцию (А НЕ НА ЕЕ КЛОН!)
+const btn4 = document.querySelector('#button--4');
+// Выносим функцию в отдельную переменную
+const someFunc = (e) => {
+    alert('Я не должен был сработать!');
+};
 
-div.insertAdjacentHTML('afterend', 'Is it the END???');
-// Вставляет код / текст с указанием позиции относительно конкретного элемента (в примере позиция указывается относительно div)
-// Несколько вариантов позиции: afterbegin, afterend, beforebegin, beforeend
+btn4.addEventListener('click', someFunc); // !Если вместо ссылки на функции будет такой же код функции (клон) это не сработает
+btn4.removeEventListener('click', someFunc); // !Если вместо ссылки на функции будет такой же код функции (клон) это не сработает
+
+
+
+// Удаление события после одного выполнения
+const btn5 = document.querySelector('#button--5');
+let i = 0;
+const funcFor5 = (e) => {
+    console.log(e.target);
+    i++;
+    if(i == 1){
+        btn5.removeEventListener('click', funcFor5);
+    }
+};
+btn5.addEventListener('click', funcFor5);
+
+// Отмена стандартного события/поведения элемента
+const link = document.querySelector('a');
+link.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log("Мы отменили переход по ссылке");
+});
+
+
+//Обьект опций (3-й аргумент .addEventListener):
+const btn6 = document.querySelector('#button--6');
+btn6.addEventListener('click', (e) =>{
+    console.log("Больше это не сработает");
+}, {once: true});
