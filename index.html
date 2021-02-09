@@ -7,15 +7,23 @@
     <title>Document</title>
 </head>
     <body>
-        <button id="button--1" onclick="alert('Вариант отработки 1')">Нажми меня</button>
-        <button id="button--2">Нажми меня</button>
-        <button id="button--3">Нажми меня</button>   
-        <button id="button--4">Ничего не должно происходить</button> 
-        <button id="button--5">Разовое выполнение</button> 
-        <button id="button--6">Разовое выполнение (лучший вариант)</button> 
-        <br>
-        <a href="https://www.youtube.com">YouTube</a>
-        
+        <div class="wrapper">
+            <div class="first">
+                <button></button>
+                <button id="current"></button>
+                <button></button>
+            </div>
+            <div class="second">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li data-current="3">3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+            <div class="third"></div>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

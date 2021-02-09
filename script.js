@@ -1,67 +1,44 @@
 "use strict";
+console.group("1");
+console.log(document.body); //получаем тег body
+console.log(document.head); //получаем тег head
+console.log(document.documentElement); //получаем тег html
+console.log(document.querySelector('html')); // тоже самое что и document.documentElement
+console.groupEnd();
 
-const btn2 = document.querySelector('#button--2');
+console.group("2");
+console.log(document.body.childNodes); //получаем все ноды и узлы (ребёнки) родителя *body
+console.log(document.body.firstChild); //получаем первого !узла-ребёнка родителя *body
+console.log(document.body.firstElementChild); //получаем первого !элемента-ребёнка родителя *body
 
+console.log(document.body.lastChild); //получаем последнего !узла-ребёнка родителя *body
+console.log(document.body.lastElementChild); //получаем последнего !элемента-ребёнка родителя *body
+console.groupEnd();
 
-btn2.onclick = function(){
-    alert('Вариант отработки 2');
-};
-// btn2.onclick = alert('Сработало событие onclick-2'); Работает также.
+console.group("3");
+console.log(document.querySelector('#current').parentNode); //получаем !узел-родителя элемента #current
+console.log(document.querySelector('#current').parentNode.parentNode); //получаем !узел-родителя < узла-родителя (прородителя) элемента #current
+console.log(document.querySelector('#current').parentElement); //получаем !элемент-родителя элемента #current
+console.groupEnd();
 
+console.group("4");
+console.log(document.querySelector('[data-current="3"]').nextSibling); //получаем следующий !УЗЕЛ! за элементом с дата атрибутом
+console.log(document.querySelector('[data-current="3"]').nextElementSibling); //получаем следующий !ЭЛЕМЕНТ! за элементом с дата атрибутом
+console.groupEnd();
 
-const btn3 = document.querySelector('#button--3');
-btn3.addEventListener('click', function(){
-    alert('Вариант отработки 3.0 ');
-});
-// btn3.addEventListener('click', alert(...); Работает иначе!
+console.group("5");
+console.log(document.querySelector('[data-current="3"]').previousSibling); //получаем предыдущий !УЗЕЛ! за элементом с дата атрибутом
+console.log(document.querySelector('[data-current="3"]').previousElementSibling); //получаем предыдущий !ЭЛЕМЕНТ! за элементом с дата атрибутом
+console.groupEnd();
 
-//Можно добавлять события на одно и то же действие:
-btn3.addEventListener('click', function(){
-    alert('Вариант отработки 3.1');
-});
-
-//Использование обьекста события "event" *(e)
-btn3.addEventListener('click', function(e){
-    console.log(e); //Вывод объекта события с полной информацией о событии 
-    e.target.textContent = 'Содержимое изменилось'; //Использование свойств обьекта события 
-});
-
-
-
-// Чтобы удалить событие оно должно сслыаться на одно и то же событие, а так же на ту же функцию (А НЕ НА ЕЕ КЛОН!)
-const btn4 = document.querySelector('#button--4');
-// Выносим функцию в отдельную переменную
-const someFunc = (e) => {
-    alert('Я не должен был сработать!');
-};
-
-btn4.addEventListener('click', someFunc); // !Если вместо ссылки на функции будет такой же код функции (клон) это не сработает
-btn4.removeEventListener('click', someFunc); // !Если вместо ссылки на функции будет такой же код функции (клон) это не сработает
-
-
-
-// Удаление события после одного выполнения
-const btn5 = document.querySelector('#button--5');
-let i = 0;
-const funcFor5 = (e) => {
-    console.log(e.target);
-    i++;
-    if(i == 1){
-        btn5.removeEventListener('click', funcFor5);
+// Для получения !только элементов (аналог childNodes для всех узлов-элементов) создаем ручной отбор элементов:
+// Для перебора используется метод for of у которого есть необходимые операторы break и continue
+console.group("6");
+for (let item of document.body.childNodes){
+    if (item.nodeName == "#text"){ //проверяем свойство элемента на пренадлежность
+        continue; //пропускаем элемент и переходим к проверке следующего
     }
-};
-btn5.addEventListener('click', funcFor5);
-
-// Отмена стандартного события/поведения элемента
-const link = document.querySelector('a');
-link.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log("Мы отменили переход по ссылке");
-});
-
-
-//Обьект опций (3-й аргумент .addEventListener):
-const btn6 = document.querySelector('#button--6');
-btn6.addEventListener('click', (e) =>{
-    console.log("Больше это не сработает");
-}, {once: true});
+    console.log(item); //если элемент подходит - выполняем с ним какие-то действия
+}
+//Внимание! В данном примере мы избавляемся только от текстовых узлов! Другие элементы (комментарии и т.д.) не отсеятся!
+console.groupEnd();
