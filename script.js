@@ -1,31 +1,58 @@
 "use strict";
 
-//touchstart - прикосновения к элементу
-//touchmove - движение по элементу
-//touchend - убираем палец с элемента
+const btns = document.querySelectorAll('button'),
+    wrapper = document.querySelector('.container');
 
-//touchenter - вхождение в область элемента при скольжении пальца
-//touchleave - выход за пределы элемента
+// btns[0].classList.add('new');
+// btns[0].classList.remove('one');
+// btns[0].classList.toggle('some');
+
+// if(btns[1].classList.contains('second')){
+//     btns[1].classList.add('hand');
+// } else{
+//     btns[1].classList.add('just-second'); 
+// }
+
+// btns[1].addEventListener('click', (e) => {
+//     btns[0].classList.toggle('red');
+// });
 
 
+// wrapper.addEventListener('click', (e) => {
+//     console.dir(e.target);
+//     if (e.target && e.target.className == 'red'){
+//         alert("Попавсь!");
+//     }
+// });
 
-
-window.addEventListener('DOMContentLoaded', () => {
-    const box = document.querySelector('.container');
-
-    box.addEventListener('touchstart',(e) =>{
-        e.preventDefault();
-
-        box.style.cssText = 'background-color: #0f0';
-        alert(e.touches.length);
-    });
-
+wrapper.addEventListener('click', (e) => {
+    console.dir(e.target);
+    if (e.target && e.target.classList.contains('one')){
+        alert("Нашел!");
+    }
 });
 
-//Свойства объекта события е.touches:
-//length - количество пальцев на элементе
-//target - элемент на котором произошло событие
-// плюс координаты, углы и т.д.
 
-//targetTouches
-//changedTouches
+//Вешаем обработчик на родителя и ловим элемент, по которму происходил клик
+wrapper.addEventListener('click', (e) => {
+    console.dir(e.target);
+    if (e.target && e.target.tagName == 'BUTTON'){
+        alert("Попавсь!");
+    }
+});
+
+
+
+//Отработчик будет работать даже с динамически добавленным элементом
+const newButton = document.createElement('button');
+newButton.textContent = btns.length + 1;
+wrapper.append(newButton);
+
+
+//Рекомендация Google
+wrapper.addEventListener('click', (e) => {
+    console.dir(e.target);
+    if (e.target && e.target.matches('button.google')){
+        alert("Я через знакомство");
+    }
+});
