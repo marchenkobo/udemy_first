@@ -1,30 +1,32 @@
 "use strict";
 
-let timerId,
-    i = 0;
+const now = new Date();
+console.log(Date.parse('2020-05-01'));
+console.log(now);
 
-    window.addEventListener('click', (e) => {
-        timerId = setInterval(logger, 500);
-    });
-    function logger(){
-        if (i === 2){
-            //сброс интервала
-            clearInterval(timerId);
-        }
-        console.log('Click detected');
-        i++;
-    }
+//Получение компонентов даты:
 
-    // Рекурсивный setTimeout (замена setInterval`у)
-    let b = 0;
-    let ownSetInterval = setTimeout(function log(){
-        console.log(b);
-        if (b < 2){
-            ownSetInterval = setTimeout(log, 500);
-            b++;
-        } 
-        else{
-            console.log('End');
-            console.log(log);
-        }
-    }, 500);
+console.log(now.getFullYear()); // Текущий год (Всегда передается 4-х значным числом)
+console.log(now.getMonth()); //Текущий месяц (Отсчет с 0)
+console.log(now.getDate()); // Текущий день месяца (Отсечт с 1)
+console.log(now.getDay()); // Текущий день недели (Отсечт с 0 - Воскресенье)
+
+console.log(now.getHours()); //Часы. Местное время
+console.log(now.getUTCHours()); //Часы. Время по UTC
+console.log(now.getTimezoneOffset()); //Разница в минутах между UTC и метным временем
+
+console.log(now.getTime()); //Количество милисекунд *тамймстамп* прошедших с 1970г.(точки отсчета)
+
+
+
+const testDate = new Date(2012, 0, 1);
+
+function getWeekDay(date){
+let day = date.getDay();
+if(day == 0){
+    console.log(7);
+} else{
+    console.log(day);
+}
+}
+getWeekDay(testDate);
